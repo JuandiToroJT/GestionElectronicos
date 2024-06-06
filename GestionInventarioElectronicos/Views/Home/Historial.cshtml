@@ -1,0 +1,32 @@
+﻿@model List<Venta>
+@{
+    ViewData["Title"] = "Historial de ventas";
+}
+
+<div class="card mt-4">
+    <div class="card-header">
+        @ViewData["Title"]
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var venta in Model)
+                {
+                    <tr>
+                        <td>@venta.Id</td>
+                        <td>@venta.Nombre</td>
+                        <td>@venta.Cantidad</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Volver al menú</a>
+</div>

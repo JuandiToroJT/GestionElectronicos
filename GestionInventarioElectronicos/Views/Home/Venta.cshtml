@@ -1,0 +1,43 @@
+﻿@model Venta
+@{
+    ViewData["Title"] = "Registro de Venta";
+    List<Producto> productos = BaseDatosSimulada.ArbolBinario.RecorrerPreOrden();
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            @ViewData["Title"]
+        </div>
+        <div class="card-body">
+            <form method="post" asp-action="Venta">
+                @if (ViewData.ModelState[""]?.Errors?.Count > 0)
+                {
+                    <div class="alert alert-danger">
+                        @foreach (var error in ViewData.ModelState[""].Errors)
+                        {
+                            <p>@error.ErrorMessage</p>
+                        }
+                    </div>
+                }
+                <div class="form-group">
+                    <label asp-for="ProductoId">Producto</label>
+                    <select asp-for="ProductoId" class="form-control">
+                        @foreach (var producto in productos)
+                        {
+                            <option value="@producto.Id">@producto.Nombre - @producto.Cantidad en stock</option>
+                        }
+                    </select>
+                    <span asp-validation-for="ProductoId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cantidad">Cantidad</label>
+                    <input asp-for="Cantidad" class="form-control" />
+                    <span asp-validation-for="Cantidad" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Registrar Venta</button>
+            </form>
+        </div>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Volver al menú</a>
+    </div>
+</div>

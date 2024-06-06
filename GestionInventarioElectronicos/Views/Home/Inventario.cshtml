@@ -1,0 +1,60 @@
+﻿@model List<Producto>
+@{
+    ViewData["Title"] = "Gestión de Inventario";
+}
+
+<div class="container">
+    <div class="principal">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+    <div class="card mt-4">
+        <div class="card-header">
+            Buscar Productos
+        </div>
+        <div class="card-body">
+            <form method="get" asp-action="Buscar", asp-controller="Home">
+                <div class="form-group">
+                    <input type="text" name="query" class="form-control" placeholder="Buscar por nombre, marca o categoría..." />
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            Productos en Inventario
+        </div>
+        <div class="card-body">
+            <a asp-action="Registro">Registrar Producto</a>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Características</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var producto in Model)
+                    {
+                        <tr>
+                            <td>@producto.Nombre</td>
+                            <td>@producto.Descripcion</td>
+                            <td>@producto.Precio</td>
+                            <td>@producto.Cantidad</td>
+                            <td>@producto.Marca</td>
+                            <td>@producto.Modelo</td>
+                            <td>@producto.Caracteristicas</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Volver al menú</a>
+    </div>
+</div>
